@@ -1,0 +1,52 @@
+{% extends "recrutamento/base.html" %}
+
+{% block titulo %}Vagas{% endblock %}
+
+{% block conteudo %}
+    <div class="d-flex">
+        <h1>Vagas</h1>
+        <button
+                class="btn btn-dark ms-auto"
+                onclick="window.location.href='/vagas/adicionar/'">
+                + Adicionar
+        </button>
+    </div>
+    <div class="d-inline-flex">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Cargo</th>
+                    <th class="d-none d-md-table-cell">Descrição</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for vaga in vagas %}
+                <tr>
+                    <td>{{ vaga.pk }}</td>
+                    <td>{{ vaga.cargo }}</td>
+                    <td class="d-none d-md-table-cell">{{ vaga.descricao }}</td>
+                    <td>
+                        <button type="button" class="btn btn-sm btn-dark">
+                            Inscrever Candidato
+                        </button>
+                        <button
+                                type="button"
+                                class="btn btn-sm btn-primary"
+                                onclick="window.location.href='/vagas/{{ vaga.pk }}/editar/'">
+                            Editar
+                        </button>
+                        <button
+                                type="button"
+                                class="btn btn-sm btn-danger"
+                                onclick="window.location.href='/vagas/{{ vaga.pk }}/excluir/'">
+                            Excluir
+                        </button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

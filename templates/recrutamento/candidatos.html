@@ -1,0 +1,55 @@
+{% extends "recrutamento/base.html" %}
+
+{% block titulo %}Candidatos{% endblock %}
+
+{% block conteudo %}
+    <div class="d-flex">
+        <h1>Candidatos</h1>
+        <button
+                class="btn btn-dark ms-auto"
+                onclick="window.location.href='/candidatos/adicionar/'">
+            + Adicionar
+        </button>
+    </div>
+    <div class="d-inline-flex">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CEP</th>
+                <th class="d-none d-md-table-cell">Logradouro</th>
+                <th class="d-none d-md-table-cell">Localidade</th>
+                <th class="d-none d-md-table-cell">UF</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidato in candidatos %}
+            <tr>
+                <td>{{ candidato.pk }}</td>
+                <td>{{ candidato.nome }}</td>
+                <td>{{ candidato.cep }}</td>
+                <td class="d-none d-md-table-cell">{{ candidato.logradouro }}</td>
+                <td class="d-none d-md-table-cell">{{ candidato.localidade }}</td>
+                <td class="d-none d-md-table-cell">{{ candidato.uf }}</td>
+                <td>
+                    <button
+                            type="button"
+                            class="btn btn-sm btn-primary"
+                            onclick="window.location.href='/candidatos/{{ candidato.pk }}/editar/'">
+                        Editar
+                    </button>
+                    <button
+                            type="button"
+                            class="btn btn-sm btn-danger"
+                            onclick="window.location.href='/candidatos/{{ candidato.pk }}/excluir/'">
+                        Excluir
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}
